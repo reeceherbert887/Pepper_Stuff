@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facilities</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+<style id="pepper-css-fallback">
+/* Pepper tablet safe CSS - no CSS variables, no modern-only features */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f3fbfa;
+    color: #103c3a;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 18px;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: #f3fbfa;
+}
+
+.content-page {
+    justify-content: flex-start;
+}
+
+h1 {
+    font-size: 50px;
+    line-height: 1.1;
+    margin: 0 0 18px 0;
+    color: #00755e;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 0 0 8px 0;
+    color: #11999e;
+}
+
+p {
+    font-size: 22px;
+    line-height: 1.35;
+    margin: 0;
+    color: #526866;
+}
+
+button,
+.menu-button,
+.back-btn {
+    display: block;
+    width: 320px;
+    min-height: 88px;
+    padding: 18px 24px;
+    font-size: 28px;
+    border: 0;
+    border-radius: 20px;
+    background-color: #11999e;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+}
+
+button:hover,
+button:focus,
+.menu-button:hover,
+.menu-button:focus {
+    background-color: #0f7f83;
+    outline: 4px solid #bcebed;
+}
+
+button:active,
+.menu-button:active {
+    transform: scale(0.97);
+}
+
+.back-btn {
+    margin-top: 12px;
+    background-color: #00755e;
+}
+
+.back-btn:hover,
+.back-btn:focus {
+    background-color: #005f4c;
+}
+
+.list-container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.card {
+    width: 100%;
+    max-width: 850px;
+    background-color: #ffffff;
+    padding: 22px;
+    border-radius: 18px;
+    border: 2px solid #d3d6d5;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.14);
+    color: #103c3a;
+}
+
+.status-text {
+    font-size: 24px;
+    color: #526866;
+}
+
+</style>
+</head>
+<body onload="loadFacilities()">
+
+<div class="container content-page">
+    <h1>Facilities</h1>
+
+    <div id="facilities-container" class="list-container">
+        <p class="status-text">Loading...</p>
+    </div>
+
+    <button class="back-btn" onclick="goToPage('index.html')">Back</button>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
