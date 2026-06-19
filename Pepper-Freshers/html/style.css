@@ -1,0 +1,171 @@
+:root {
+    --bg-main: #252a34;
+    --bg-dark: #1b1f27;
+
+    --card-bg: #ffffff;
+
+    --accent: #52adc8;
+    --accent-hover: #3e95af;
+
+    --text-light: #ffffff;
+    --text-dark: #252a34;
+    --text-muted: #6f777d;
+
+    --border: #d9d9d9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-light);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.tablet-screen {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+}
+
+.screen {
+    display: none;
+
+    width: 100%;
+    max-width: 1000px;
+
+    background: var(--card-bg);
+
+    color: var(--text-dark);
+
+    padding: 50px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.25);
+
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2.3rem;
+    margin-bottom: 30px;
+}
+
+p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+}
+
+#question-count {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+
+    background: var(--accent);
+    color: white;
+
+    border-radius: 12px;
+
+    padding: 20px 30px;
+
+    font-size: 1.4rem;
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: var(--accent-hover);
+}
+
+#answers {
+    margin-top: 40px;
+
+    display: grid;
+    gap: 15px;
+}
+
+.answer-button {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 22px;
+}
+
+.answer-button:hover {
+    transform: translateY(-2px);
+}
+
+.qr-box {
+    margin-top: 40px;
+
+    border: 2px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+.qr-placeholder {
+    width: 200px;
+    height: 200px;
+
+    margin: 20px auto;
+
+    background: #eeeeee;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--text-muted);
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+.logo {
+    width: 180px;
+    margin-bottom: 25px;
+}
+
+.start-title {
+    color: var(--bg-main);
+}
+
+.result-title {
+    color: var(--accent);
+}
+
+.footer-text {
+    margin-top: 30px;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
