@@ -1,6 +1,4 @@
-
-// Define the questions and answers for the quiz. Each question has a text prompt and a list of possible answers, each associated with a type of robot enthusiast.
-const questions = [
+var questions = [
   {
     question: "What sounds most interesting?",
     answers: [
@@ -47,9 +45,18 @@ const questions = [
     ]
   }
 ];
-// Define the results for each type of robot enthusiast from the quiz. 
-// Each type has a title and a description that explains what kind of robot enthusiast they are based on their answers to the quiz questions.
-const results = {
+
+var qiSession = null;
+
+try {
+  QiSession(function (session) {
+    qiSession = session;
+  });
+} catch (error) {
+  qiSession = null;
+}
+
+var results = {
   ai: {
     title: "AI Researcher",
     description: "You enjoy solving complex problems using machine learning and intelligent systems."
@@ -76,50 +83,55 @@ const results = {
   }
 };
 
-let currentQuestion = 0;
-let scores = {};
+var currentQuestion = 0;
+var scores = {};
 
 function showScreen(screenId) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
+  var screens = document.getElementsByClassName("screen");
 
-  document.getElementById(screenId).classList.add("active");
+  for (var i = 0; i < screens.length; i++) {
+    screens[i].className = "screen";
+  }
+
+  document.getElementById(screenId).className = "screen active";
 }
-// Start the quiz by resetting the current question index and scores, then show the quiz screen and display the first question.
+
 function startQuiz() {
   currentQuestion = 0;
   scores = {};
   showScreen("quiz-screen");
   showQuestion();
 }
-// Display the current question and its possible answers on the quiz screen. 
-// The function updates the question count, question text, and creates buttons for each answer.
+
 function showQuestion() {
-  const question = questions[currentQuestion];
+  var question = questions[currentQuestion];
 
-  document.getElementById("question-count").textContent =
-    `Question ${currentQuestion + 1} of ${questions.length}`;
+  document.getElementById("question-count").innerHTML =
+    "Question " + (currentQuestion + 1) + " of " + questions.length;
 
-  document.getElementById("question-text").textContent = question.question;
+  document.getElementById("question-text").innerHTML = question.question;
 
-  const answersDiv = document.getElementById("answers");
+  var answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
 
-  question.answers.forEach(answer => {
-    const button = document.createElement("button");
-    button.textContent = answer.text;
-    button.classList.add("answer-button");
+  for (var i = 0; i < question.answers.length; i++) {
+    var answer = question.answers[i];
 
-    button.onclick = () => selectAnswer(answer.type);
+    var button = document.createElement("button");
+    button.className = "answer-button";
+    button.innerHTML = answer.text;
+    button.setAttribute("data-type", answer.type);
+
+    button.onclick = function () {
+      selectAnswer(this.getAttribute("data-type"));
+    };
 
     answersDiv.appendChild(button);
-  });
+  }
 }
-// Update the score for the selected answer type, move to the next question, and either show the next question or display the final result if all questions have been answered.
-function selectAnswer(type) {
-  scores[type] = (scores[type] || 0) + 1;
 
+function selectAnswer(type) {
+  scores[type] = scores[type] ? scores[type] + 1 : 1;
   currentQuestion++;
 
   if (currentQuestion < questions.length) {
@@ -128,21 +140,49 @@ function selectAnswer(type) {
     showResult();
   }
 }
-// Calculate the type of robot enthusiast with the highest score and display the corresponding result on the result screen.
+
 function showResult() {
-  let topType = Object.keys(scores).reduce((a, b) =>
-    scores[a] > scores[b] ? a : b
-  );
+  var topType = null;
+  var topScore = -1;
 
-  const result = results[topType];
+  for (var type in scores) {
+    if (scores[type] > topScore) {
+      topType = type;
+      topScore = scores[type];
+    }
+  }
 
-  document.getElementById("result-title").textContent =
-    `You are a ${result.title}!`;
+  var result = results[topType];
 
-  document.getElementById("result-description").textContent =
+  document.getElementById("result-title").innerHTML =
+    "You are a " + result.title + "!";
+
+  document.getElementById("result-description").innerHTML =
     result.description;
 
   showScreen("result-screen");
+
+sendResultToPepper("You are a " + result.title + ". " + result.description);
+}
+
+function sendResultToPepper(message) {
+  alert("Sending to Pepper: " + message);
+
+  if (typeof QiSession === "undefined") {
+    alert("QiSession is not available");
+    return;
+  }
+
+  QiSession(function (session) {
+    session.service("ALMemory").then(function (memory) {
+      memory.raiseEvent("PepperFreshers/Result", message);
+      alert("Event raised");
+    }, function (error) {
+      alert("ALMemory failed: " + error);
+    });
+  }, function (error) {
+    alert("QiSession failed: " + error);
+  });
 }
 
 function resetQuiz() {
