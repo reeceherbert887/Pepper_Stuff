@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Pepper Personality Test</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="style.css?v=3">
   <script src="/libs/qimessaging/2/qimessaging.js"></script>
 </head>
+
 <body>
 
   <main class="tablet-screen">
@@ -27,12 +29,10 @@
       <h1 id="result-title">Your Result</h1>
       <p id="result-description"></p>
 
-      <a href="https://hulluniunion.com/shop" target="_blank" class="qr-link">
-        <div class="qr-box">
-          <p>Scan to join Hull Robotics Society</p>
-          <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hulluniunion.com/shop" alt="Hull Uni Union shop QR code">
-        </div>
-      </a>
+      <<div class="qr-box">
+  <p>Scan to join Hull Robotics Society</p>
+  <img class="qr-image" src= "robsoc-qr.png" alt="Join Hull Robotics Society QR code">
+</div>
 
       <button type="button" onclick="resetQuiz()">Restart</button>
       <button type="button" onclick="nextSection()">Next Section</button>
@@ -41,16 +41,18 @@
     <section id="projects-screen" class="screen">
       <h1>Choose a Project</h1>
       <p>Select which Pepper project you'd like to explore:</p>
+
       <div class="projects-container">
         <button type="button" class="project-button" onclick="selectProject('Pepper Dance')">Pepper Dance</button>
         <button type="button" class="project-button" onclick="selectProject('Openday')">Openday</button>
         <button type="button" class="project-button" onclick="selectProject('Robosoc 25-26')">Robosoc 25-26</button>
       </div>
+
       <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
     </section>
 
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

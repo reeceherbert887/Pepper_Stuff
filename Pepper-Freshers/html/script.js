@@ -46,16 +46,6 @@ var questions = [
   }
 ];
 
-var qiSession = null;
-
-try {
-  QiSession(function (session) {
-    qiSession = session;
-  });
-} catch (error) {
-  qiSession = null;
-}
-
 var results = {
   ai: {
     title: "AI Researcher",
@@ -162,46 +152,29 @@ function showResult() {
 
   showScreen("result-screen");
 
-sendResultToPepper("You are a " + result.title + ". " + result.description);
+  sendResultToPepper(
+    "You are a " + result.title + ". " + result.description
+  );
 }
 
 function sendResultToPepper(message) {
-  alert("Sending to Pepper: " + message);
-
   if (typeof QiSession === "undefined") {
-    alert("QiSession is not available");
     return;
   }
 
   QiSession(function (session) {
     session.service("ALMemory").then(function (memory) {
       memory.raiseEvent("PepperFreshers/Result", message);
-      alert("Event raised");
-    }, function (error) {
-      alert("ALMemory failed: " + error);
     });
-  }, function (error) {
-    alert("QiSession failed: " + error);
   });
 }
 
 function nextSection() {
-  console.log("nextSection clicked");
-  alert("Next section clicked");
-
-  var projectScreen = document.getElementById("projects-screen");
-  if (projectScreen) {
-    showScreen("projects-screen");
-    projectScreen.style.display = "block";
-  } else {
-    alert("Projects screen not found");
-  }
+  showScreen("projects-screen");
 }
 
 function selectProject(projectName) {
-  alert("Loading project: " + projectName);
-  // Placeholder for loading the selected project
-  // This will be updated to load actual Pepper behaviors
+  sendResultToPepper("You selected " + projectName + ".");
 }
 
 function resetQuiz() {
