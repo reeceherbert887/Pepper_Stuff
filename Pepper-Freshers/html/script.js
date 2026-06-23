@@ -185,6 +185,25 @@ function sendResultToPepper(message) {
   });
 }
 
+function nextSection() {
+  console.log("nextSection clicked");
+  alert("Next section clicked");
+
+  var projectScreen = document.getElementById("projects-screen");
+  if (projectScreen) {
+    showScreen("projects-screen");
+    projectScreen.style.display = "block";
+  } else {
+    alert("Projects screen not found");
+  }
+}
+
+function selectProject(projectName) {
+  alert("Loading project: " + projectName);
+  // Placeholder for loading the selected project
+  // This will be updated to load actual Pepper behaviors
+}
+
 function resetQuiz() {
   showScreen("start-screen");
 }

@@ -14,7 +14,7 @@
       <h1>Hull Robotics Society</h1>
       <h2>Robotics Personality Test</h2>
       <p>Find out what type of roboticist you are.</p>
-      <button onclick="startQuiz()">Start</button>
+      <button type="button" onclick="startQuiz()">Start</button>
     </section>
 
     <section id="quiz-screen" class="screen">
@@ -27,12 +27,26 @@
       <h1 id="result-title">Your Result</h1>
       <p id="result-description"></p>
 
-      <div class="qr-box">
-        <p>Scan to join Hull Robotics Society</p>
-        <div class="qr-placeholder">QR CODE</div>
-      </div>
+      <a href="https://hulluniunion.com/shop" target="_blank" class="qr-link">
+        <div class="qr-box">
+          <p>Scan to join Hull Robotics Society</p>
+          <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://hulluniunion.com/shop" alt="Hull Uni Union shop QR code">
+        </div>
+      </a>
 
-      <button onclick="resetQuiz()">Restart</button>
+      <button type="button" onclick="resetQuiz()">Restart</button>
+      <button type="button" onclick="nextSection()">Next Section</button>
+    </section>
+
+    <section id="projects-screen" class="screen">
+      <h1>Choose a Project</h1>
+      <p>Select which Pepper project you'd like to explore:</p>
+      <div class="projects-container">
+        <button type="button" class="project-button" onclick="selectProject('Pepper Dance')">Pepper Dance</button>
+        <button type="button" class="project-button" onclick="selectProject('Openday')">Openday</button>
+        <button type="button" class="project-button" onclick="selectProject('Robosoc 25-26')">Robosoc 25-26</button>
+      </div>
+      <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
     </section>
 
   </main>

@@ -133,22 +133,17 @@ button:hover {
 }
 
 .qr-placeholder {
+    display: none;
+}
+
+.qr-image {
+    display: block;
     width: 200px;
     height: 200px;
-
     margin: 20px auto;
-
-    background: #eeeeee;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    color: var(--text-muted);
-
+    object-fit: contain;
     border-radius: 10px;
-
-    font-weight: bold;
+    border: 2px solid var(--border);
 }
 
 .logo {
@@ -168,4 +163,44 @@ button:hover {
     margin-top: 30px;
     color: var(--text-muted);
     font-size: 1rem;
+}
+
+.qr-link {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 15px;
+    transition: 0.2s ease;
+}
+
+.qr-link:hover .qr-box {
+    border-color: var(--accent);
+    box-shadow: 0 4px 15px rgba(82, 173, 200, 0.2);
+}
+
+.projects-container {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.project-button {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 25px;
+    background: var(--accent);
+    color: white;
+}
+
+.project-button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.back-button {
+    margin-top: 30px;
+    background: var(--text-muted);
+}
+
+.back-button:hover {
+    background: #5a5f66;
 }
