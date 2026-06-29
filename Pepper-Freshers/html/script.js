@@ -177,6 +177,18 @@ function selectProject(projectName) {
   sendResultToPepper("You selected " + projectName + ".");
 }
 
+function selectDance(danceName) {
+  if (typeof QiSession === "undefined") {
+    return;
+  }
+
+  QiSession(function (session) {
+    session.service("ALMemory").then(function (memory) {
+      memory.raiseEvent("PepperFreshers/DanceSelected", danceName);
+    });
+  });
+}
+
 function resetQuiz() {
   showScreen("start-screen");
 }

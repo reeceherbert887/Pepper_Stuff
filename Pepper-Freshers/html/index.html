@@ -29,10 +29,10 @@
       <h1 id="result-title">Your Result</h1>
       <p id="result-description"></p>
 
-      <<div class="qr-box">
-  <p>Scan to join Hull Robotics Society</p>
-  <img class="qr-image" src= "robsoc-qr.png" alt="Join Hull Robotics Society QR code">
-</div>
+      <div class="qr-box">
+        <p>Scan to join Hull Robotics Society</p>
+        <div class="qr-placeholder">QR CODE</div>
+      </div>
 
       <button type="button" onclick="resetQuiz()">Restart</button>
       <button type="button" onclick="nextSection()">Next Section</button>
@@ -43,12 +43,43 @@
       <p>Select which Pepper project you'd like to explore:</p>
 
       <div class="projects-container">
-        <button type="button" class="project-button" onclick="selectProject('Pepper Dance')">Pepper Dance</button>
-        <button type="button" class="project-button" onclick="selectProject('Openday')">Openday</button>
-        <button type="button" class="project-button" onclick="selectProject('Robosoc 25-26')">Robosoc 25-26</button>
+        <button type="button" class="project-button" onclick="showScreen('pepper-dance-screen')">
+          Pepper Dance
+        </button>
+
+        <button type="button" class="project-button" onclick="selectProject('Openday')">
+          Openday
+        </button>
+
+        <button type="button" class="project-button" onclick="selectProject('Robosoc 25-26')">
+          Robosoc 25-26
+        </button>
       </div>
 
       <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
+    </section>
+
+    <section id="pepper-dance-screen" class="screen">
+      <h1>Pepper Dance</h1>
+      <p>Select a dance:</p>
+
+      <div class="projects-container">
+        <button type="button" class="project-button" onclick="selectDance('dance_knights')">
+          Dance of the Knights
+        </button>
+
+        <button type="button" class="project-button" onclick="selectDance('walk_this_way')">
+          Walk This Way
+        </button>
+
+        <button type="button" class="project-button" onclick="selectDance('bee_gees')">
+          Bee Gees
+        </button>
+      </div>
+
+      <button type="button" onclick="showScreen('projects-screen')" class="back-button">
+        Back
+      </button>
     </section>
 
   </main>
