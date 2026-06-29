@@ -178,6 +178,8 @@ function selectProject(projectName) {
 }
 
 function selectDance(danceName) {
+  showScreen("dance-playing-screen");
+
   if (typeof QiSession === "undefined") {
     return;
   }

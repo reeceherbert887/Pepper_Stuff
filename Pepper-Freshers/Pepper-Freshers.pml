@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Package name="Pepper-Freshers" format_version="4">
+<Package name="Pepper-Freshers" format_version="5">
     <Manifest src="manifest.xml" />
     <BehaviorDescriptions>
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
@@ -30,12 +30,15 @@
         <File name="translation_it_IT" src="translations/translation_it_IT.qm" />
         <File name="translation_ja_JP" src="translations/translation_ja_JP.qm" />
         <File name="" src=".vs/Pepper-Freshers/v16/.suo" />
-        <File name="COMBINE_NOTES" src="COMBINE_NOTES.md" />
+        <File name="walk_this_way" src="behavior_1/walk_this_way.ogg" />
+        <File name="Hungarian_trajectory" src="behavior_1/Hungarian_trajectory.pmt" />
+        <File name="DTHungryTrajectoryFileName" src="behavior_1/DTHungryTrajectoryFileName.py" />
+        <File name="02_Hungary" src="behavior_1/02_Hungary.ogg" />
     </Resources>
     <Topics>
-        <Topic name="dance_danceoftheknights_enu" src="dance_danceoftheknights/dance_danceoftheknights_enu.top" topicName="danceoftheknights" language="en_US" />
-        <Topic name="dance_danceoftheknights_frf" src="dance_danceoftheknights/dance_danceoftheknights_frf.top" topicName="danceoftheknights" language="fr_FR" />
-        <Topic name="dance_danceoftheknights_jpj" src="dance_danceoftheknights/dance_danceoftheknights_jpj.top" topicName="danceoftheknights" language="ja_JP" />
+        <Topic name="dance_danceoftheknights_enu" src="dance_danceoftheknights/dance_danceoftheknights_enu.top" topicName="danceoftheknights" language="en_US" nuance="enu" />
+        <Topic name="dance_danceoftheknights_frf" src="dance_danceoftheknights/dance_danceoftheknights_frf.top" topicName="danceoftheknights" language="fr_FR" nuance="frf" />
+        <Topic name="dance_danceoftheknights_jpj" src="dance_danceoftheknights/dance_danceoftheknights_jpj.top" topicName="danceoftheknights" language="ja_JP" nuance="jpj" />
     </Topics>
     <IgnoredPaths />
     <Translations auto-fill="en_US">

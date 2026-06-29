@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Pepper Personality Test</title>
@@ -17,6 +18,18 @@
       <h2>Robotics Personality Test</h2>
       <p>Find out what type of roboticist you are.</p>
       <button type="button" onclick="startQuiz()">Start</button>
+    </section>
+
+    <section id="dance-playing-screen" class="screen">
+      <h1>Hull Robotics Society</h1>
+
+      <img src="robsoc-qr.png" alt="Hull Robotics Society Logo" class="dance-logo">
+
+      <p>Pepper is dancing!</p>
+
+      <button type="button" onclick="showScreen('pepper-dance-screen')" class="back-button">
+        Back to dances
+      </button>
     </section>
 
     <section id="quiz-screen" class="screen">
@@ -60,8 +73,7 @@
     </section>
 
     <section id="pepper-dance-screen" class="screen">
-      <h1>Pepper Dance</h1>
-      <p>Select a dance:</p>
+      <h1>Select a dance</h1>
 
       <div class="projects-container">
         <button type="button" class="project-button" onclick="selectDance('dance_knights')">
@@ -72,8 +84,8 @@
           Walk This Way
         </button>
 
-        <button type="button" class="project-button" onclick="selectDance('bee_gees')">
-          Bee Gees
+        <button type="button" class="project-button" onclick="selectDance('hungary')">
+          Hungary
         </button>
       </div>
 
@@ -86,4 +98,5 @@
 
   <script src="script.js?v=3"></script>
 </body>
+
 </html>
