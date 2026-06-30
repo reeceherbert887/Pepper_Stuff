@@ -224,6 +224,21 @@ function selectDance(danceName) {
   });
 }
 
+function selectRefreshers(refreshersName) {
+  showScreen("dance-playing-screen");
+
+  if (typeof QiSession === "undefined") {
+    console.log("Running locally, not sending to Pepper:", refreshersName);
+    return;
+  }
+
+  QiSession(function (session) {
+    session.service("ALMemory").then(function (memory) {
+      memory.raiseEvent("PepperFreshers/RefreshersSelected", refreshersName);
+    });
+  });
+}
+
 function resetQuiz() {
   showScreen("start-screen");
 }

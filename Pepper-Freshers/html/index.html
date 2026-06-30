@@ -64,9 +64,9 @@
           Openday
         </button>
 
-        <button type="button" class="project-button" onclick="selectProject('Robosoc 25-26')">
-          Robosoc 25-26
-        </button>
+        <button type="button" class="project-button" onclick="showScreen('refreshers-screen')">
+  Refreshers
+</button>
       </div>
 
       <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
@@ -93,6 +93,29 @@
         Back
       </button>
     </section>
+
+    <section id="refreshers-screen" class="screen">
+  <h1>Refreshers</h1>
+  <p>Choose a Refreshers activity:</p>
+
+  <div class="projects-container">
+    <button type="button" class="project-button" onclick="selectRefreshers('Bees')">
+      Bees
+    </button>
+
+    <button type="button" class="project-button" onclick="selectRefreshers('Surprise')">
+      Surprise
+    </button>
+
+    <button type="button" class="project-button" onclick="selectRefreshers('Speech')">
+      Speech
+    </button>
+  </div>
+
+  <button type="button" onclick="showScreen('projects-screen')" class="back-button">
+    Back
+  </button>
+</section>
 
   </main>
 
