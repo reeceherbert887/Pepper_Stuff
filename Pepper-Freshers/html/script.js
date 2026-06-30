@@ -169,6 +169,36 @@ function sendResultToPepper(message) {
   });
 }
 
+var localDanceAudio = null;
+
+function playLocalDanceAudio(danceName) {
+  var audioFile = "";
+
+  if (danceName === "dance_knights") {
+    audioFile = "../behavior_1/kishitachinoodori.ogg";
+  }
+
+  if (danceName === "walk_this_way") {
+    audioFile = "../behavior_1/walk_this_way.ogg";
+  }
+
+  if (danceName === "hungarian") {
+    audioFile = "../behavior_1/02_Hungary.ogg";
+  }
+
+  if (audioFile === "") {
+    return;
+  }
+
+  if (localDanceAudio) {
+    localDanceAudio.pause();
+    localDanceAudio.currentTime = 0;
+  }
+
+  localDanceAudio = new Audio(audioFile);
+  localDanceAudio.play();
+}
+
 function nextSection() {
   showScreen("projects-screen");
 }
@@ -180,7 +210,10 @@ function selectProject(projectName) {
 function selectDance(danceName) {
   showScreen("dance-playing-screen");
 
+  playLocalDanceAudio(danceName);
+
   if (typeof QiSession === "undefined") {
+    console.log("Running locally, not sending to Pepper:", danceName);
     return;
   }
 
