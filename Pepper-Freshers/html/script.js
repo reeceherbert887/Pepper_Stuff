@@ -169,37 +169,83 @@ function sendResultToPepper(message) {
   });
 }
 
+
+
 var localDanceAudio = null;
+var localVideo = null;
 
-function playLocalDanceAudio(danceName) {
-  var audioFile = "";
+function isPepperTablet() {
+  return (typeof QiSession !== "undefined");
+}
 
-  if (danceName === "dance_knights") {
-    audioFile = "../behavior_1/kishitachinoodori.ogg";
-  }
+function setPlayingScreen(message, returnScreen) {
+  var messageEl = document.getElementById("playing-message");
+  var backButton = document.getElementById("playing-back-button");
+  var preview = document.getElementById("local-preview");
 
-  if (danceName === "walk_this_way") {
-    audioFile = "../behavior_1/walk_this_way.ogg";
-  }
+  if (messageEl) messageEl.innerHTML = message;
+  if (backButton) backButton.onclick = function () { stopLocalMedia(); showScreen(returnScreen); };
+  if (preview) preview.innerHTML = "";
 
-  if (danceName === "hungarian") {
-    audioFile = "../behavior_1/02_Hungary.ogg";
-  }
+  showScreen("dance-playing-screen");
+}
 
-  if (audioFile === "") {
-    return;
-  }
-
+function stopLocalMedia() {
   if (localDanceAudio) {
     localDanceAudio.pause();
     localDanceAudio.currentTime = 0;
+    localDanceAudio = null;
+  }
+  if (localVideo) {
+    localVideo.pause();
+    localVideo.currentTime = 0;
+    localVideo = null;
+  }
+}
+
+function playLocalDanceAudio(danceName) {
+  var audioFile = "";
+  if (danceName === "dance_knights") audioFile = "../behavior_1/kishitachinoodori.ogg";
+  if (danceName === "walk_this_way") audioFile = "../behavior_1/walk_this_way.ogg";
+  if (danceName === "02_Hungary" || danceName === "hungarian" || danceName === "hungary") audioFile = "../behavior_1/02_Hungary.ogg";
+  if (audioFile === "") return;
+  stopLocalMedia();
+  localDanceAudio = new Audio(audioFile);
+  localDanceAudio.play().catch(function (err) { console.log("Local dance audio could not play:", err); });
+}
+
+function playLocalRefreshers(refreshersName) {
+  var preview = document.getElementById("local-preview");
+  var audioFile = "";
+  var videoFile = "";
+
+  if (refreshersName === "Bees") {
+    videoFile = "../refreshers/Bees_Gees.mp4";
+    audioFile = "../refreshers/epicsax.ogg";
+  }
+  if (refreshersName === "Surprise") {
+    videoFile = "../refreshers/Rick Roll Link.mp4";
+    audioFile = "../refreshers/swiftswords_ext.mp3";
+  }
+  if (refreshersName === "Speech") {
+    videoFile = "../refreshers/HullRS_Christmas_2025.mp4";
   }
 
-  localDanceAudio = new Audio(audioFile);
-  localDanceAudio.play();
+  stopLocalMedia();
+
+  if (preview && videoFile !== "") {
+    preview.innerHTML = '<video id="refreshers-local-video" width="80%" controls autoplay><source src="' + videoFile + '" type="video/mp4"></video>';
+    localVideo = document.getElementById("refreshers-local-video");
+  }
+
+  if (audioFile !== "") {
+    localDanceAudio = new Audio(audioFile);
+    localDanceAudio.play().catch(function (err) { console.log("Local refreshers audio could not play:", err); });
+  }
 }
 
 function nextSection() {
+  stopLocalMedia();
   showScreen("projects-screen");
 }
 
@@ -207,38 +253,71 @@ function selectProject(projectName) {
   sendResultToPepper("You selected " + projectName + ".");
 }
 
-function selectDance(danceName) {
-  showScreen("dance-playing-screen");
-
-  playLocalDanceAudio(danceName);
-
-  if (typeof QiSession === "undefined") {
-    console.log("Running locally, not sending to Pepper:", danceName);
+function raisePepperEvent(eventName, value) {
+  if (!isPepperTablet()) {
+    console.log("LOCAL TEST: would send to Pepper:", eventName, value);
     return;
   }
 
   QiSession(function (session) {
     session.service("ALMemory").then(function (memory) {
-      memory.raiseEvent("PepperFreshers/DanceSelected", danceName);
+      memory.raiseEvent(eventName, value);
     });
   });
+}
+
+function selectDance(danceName) {
+  setPlayingScreen("Pepper is dancing!", "pepper-dance-screen");
+
+  if (!isPepperTablet()) {
+    console.log("LOCAL TEST: dance selected:", danceName);
+    playLocalDanceAudio(danceName);
+    return;
+  }
+
+  raisePepperEvent("PepperFreshers/DanceSelected", danceName);
 }
 
 function selectRefreshers(refreshersName) {
-  showScreen("dance-playing-screen");
+  setPlayingScreen("Pepper is starting Refreshers: " + refreshersName, "refreshers-screen");
 
-  if (typeof QiSession === "undefined") {
-    console.log("Running locally, not sending to Pepper:", refreshersName);
+  if (!isPepperTablet()) {
+    console.log("LOCAL TEST: refreshers selected:", refreshersName);
+    playLocalRefreshers(refreshersName);
     return;
   }
 
+  raisePepperEvent("PepperFreshers/RefreshersSelected", refreshersName);
+  raisePepperEvent("PepperFreshers/DanceSelected", refreshersName);
+}
+
+function resetQuiz() {
+  stopLocalMedia();
+  showScreen("start-screen");
+}
+
+function setupPepperReturnEvents() {
+  if (!isPepperTablet()) return;
+
   QiSession(function (session) {
     session.service("ALMemory").then(function (memory) {
-      memory.raiseEvent("PepperFreshers/RefreshersSelected", refreshersName);
+      memory.subscriber("PepperFreshers/ReturnToDancePage").then(function (subscriber) {
+        subscriber.signal.connect(function () {
+          stopLocalMedia();
+          showScreen("pepper-dance-screen");
+        });
+      });
+
+      memory.subscriber("PepperFreshers/ReturnToRefreshersPage").then(function (subscriber) {
+        subscriber.signal.connect(function () {
+          stopLocalMedia();
+          showScreen("refreshers-screen");
+        });
+      });
     });
   });
 }
 
-function resetQuiz() {
-  showScreen("start-screen");
-}
+window.onload = function () {
+  setupPepperReturnEvents();
+};

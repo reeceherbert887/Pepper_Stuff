@@ -4,13 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Pepper Personality Test</title>
-
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=6">
   <script src="/libs/qimessaging/2/qimessaging.js"></script>
 </head>
 
 <body>
-
   <main class="tablet-screen">
 
     <section id="start-screen" class="screen active">
@@ -22,14 +20,10 @@
 
     <section id="dance-playing-screen" class="screen">
       <h1>Hull Robotics Society</h1>
-
-      <img src="robsoc-qr.png" alt="Hull Robotics Society Logo" class="dance-logo">
-
-      <p>Pepper is dancing!</p>
-
-      <button type="button" onclick="showScreen('pepper-dance-screen')" class="back-button">
-        Back to dances
-      </button>
+      <img id="playing-logo" src="robsoc-qr.png" alt="Hull Robotics Society Logo" class="dance-logo">
+      <p id="playing-message">Pepper is starting...</p>
+      <div id="local-preview"></div>
+      <button id="playing-back-button" type="button" onclick="showScreen('pepper-dance-screen')" class="back-button">Back</button>
     </section>
 
     <section id="quiz-screen" class="screen">
@@ -41,12 +35,10 @@
     <section id="result-screen" class="screen">
       <h1 id="result-title">Your Result</h1>
       <p id="result-description"></p>
-
-         <div class="qr-box">
-      <p>Scan to join Hull Robotics Society</p>
-      <img src="robsoc-qr.png" alt="Hull Robotics Society QR code" class="qr-image">
-    </div>
-
+      <div class="qr-box">
+        <p>Scan to join Hull Robotics Society</p>
+        <img src="robsoc-qr.png" alt="Hull Robotics Society QR code" class="qr-image">
+      </div>
       <button type="button" onclick="resetQuiz()">Restart</button>
       <button type="button" onclick="nextSection()">Next Section</button>
     </section>
@@ -54,72 +46,36 @@
     <section id="projects-screen" class="screen">
       <h1>Choose a Project</h1>
       <p>Select which Pepper project you'd like to explore:</p>
-
       <div class="projects-container">
-        <button type="button" class="project-button" onclick="showScreen('pepper-dance-screen')">
-          Pepper Dance
-        </button>
-
-        <button type="button" class="project-button" onclick="selectProject('Openday')">
-          Openday
-        </button>
-
-        <button type="button" class="project-button" onclick="showScreen('refreshers-screen')">
-  Refreshers
-</button>
+        <button type="button" class="project-button" onclick="showScreen('pepper-dance-screen')">Pepper Dance</button>
+        <button type="button" class="project-button" onclick="selectProject('Openday')">Openday</button>
+        <button type="button" class="project-button" onclick="showScreen('refreshers-screen')">Refreshers</button>
       </div>
-
       <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
     </section>
 
     <section id="pepper-dance-screen" class="screen">
       <h1>Select a dance</h1>
-
       <div class="projects-container">
-        <button type="button" class="project-button" onclick="selectDance('dance_knights')">
-          Dance of the Knights
-        </button>
-
-        <button type="button" class="project-button" onclick="selectDance('walk_this_way')">
-          Walk This Way
-        </button>
-
-        <button type="button" class="project-button" onclick="selectDance('hungary')">
-          Hungary
-        </button>
+        <button type="button" class="project-button" onclick="selectDance('dance_knights')">Dance of the Knights</button>
+        <button type="button" class="project-button" onclick="selectDance('walk_this_way')">Walk This Way</button>
+        <button type="button" class="project-button" onclick="selectDance('02_Hungary')">Hungary</button>
       </div>
-
-      <button type="button" onclick="showScreen('projects-screen')" class="back-button">
-        Back
-      </button>
+      <button type="button" onclick="showScreen('projects-screen')" class="back-button">Back</button>
     </section>
 
     <section id="refreshers-screen" class="screen">
-  <h1>Refreshers</h1>
-  <p>Choose a Refreshers activity:</p>
-
-  <div class="projects-container">
-    <button type="button" class="project-button" onclick="selectRefreshers('Bees')">
-      Bees
-    </button>
-
-    <button type="button" class="project-button" onclick="selectRefreshers('Surprise')">
-      Surprise
-    </button>
-
-    <button type="button" class="project-button" onclick="selectRefreshers('Speech')">
-      Speech
-    </button>
-  </div>
-
-  <button type="button" onclick="showScreen('projects-screen')" class="back-button">
-    Back
-  </button>
-</section>
+      <h1>Refreshers</h1>
+      <p>Choose a Refreshers activity:</p>
+      <div class="projects-container">
+        <button type="button" class="project-button" onclick="selectRefreshers('Bees')">Bees</button>
+        <button type="button" class="project-button" onclick="selectRefreshers('Surprise')">Surprise</button>
+        <button type="button" class="project-button" onclick="selectRefreshers('Speech')">Speech</button>
+      </div>
+      <button type="button" onclick="showScreen('projects-screen')" class="back-button">Back</button>
+    </section>
 
   </main>
-
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=6"></script>
 </body>
-
 </html>

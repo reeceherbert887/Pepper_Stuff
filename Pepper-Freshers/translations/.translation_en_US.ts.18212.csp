@@ -8,6 +8,11 @@
             <comment>Text</comment>
             <translation type="obsolete">Hello, Welcome to the Robotics test.</translation>
         </message>
+        <message>
+            <source>Hello</source>
+            <comment>Text</comment>
+            <translation>Hello</translation>
+        </message>
     </context>
     <context>
         <name>behavior_1/behavior.xar:/Bees/Head Final Speech</name>
