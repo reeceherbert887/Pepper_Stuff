@@ -2,19 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
     <context>
-        <name>behavior_1/behavior.xar:/Head Final Speech</name>
+        <name>behavior_1/behavior.xar:/Animated Say</name>
+        <message>
+            <source>Hello</source>
+            <comment>Text</comment>
+            <translation type="vanished">Hallo</translation>
+        </message>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
-            <source>this may seem silly however this is only some of what i am capable of! If you press my togh hand, you can find out more about the Robotics Society.</source>
+            <source>Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</source>
             <comment>Text</comment>
             <translation type="unfinished"></translation>
         </message>
     </context>
     <context>
-        <name>behavior_1/behavior.xar:/Head Intro Speech</name>
+        <name>behavior_1/behavior.xar:/Head Final Speech</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
-            <source>Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</source>
+            <source>this may seem silly however this is only some of what i am capable of! If you press my togh hand, you can find out more about the Robotics Society.</source>
             <comment>Text</comment>
             <translation type="unfinished"></translation>
         </message>

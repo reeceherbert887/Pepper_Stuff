@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Package name="Peppe-Freshers" format_version="4">
+<Package name="Peppe-Freshers" format_version="5">
     <Manifest src="manifest.xml" />
     <BehaviorDescriptions>
         <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
@@ -41,9 +41,9 @@
         <File name="REFRESHERS_UI_FIX_NOTES" src="REFRESHERS_UI_FIX_NOTES.md" />
     </Resources>
     <Topics>
-        <Topic name="dance_danceoftheknights_enu" src="dance_danceoftheknights/dance_danceoftheknights_enu.top" topicName="danceoftheknights" language="en_US" />
-        <Topic name="dance_danceoftheknights_frf" src="dance_danceoftheknights/dance_danceoftheknights_frf.top" topicName="danceoftheknights" language="fr_FR" />
-        <Topic name="dance_danceoftheknights_jpj" src="dance_danceoftheknights/dance_danceoftheknights_jpj.top" topicName="danceoftheknights" language="ja_JP" />
+        <Topic name="dance_danceoftheknights_enu" src="dance_danceoftheknights/dance_danceoftheknights_enu.top" topicName="danceoftheknights" language="en_US" nuance="enu" />
+        <Topic name="dance_danceoftheknights_frf" src="dance_danceoftheknights/dance_danceoftheknights_frf.top" topicName="danceoftheknights" language="fr_FR" nuance="frf" />
+        <Topic name="dance_danceoftheknights_jpj" src="dance_danceoftheknights/dance_danceoftheknights_jpj.top" topicName="danceoftheknights" language="ja_JP" nuance="jpj" />
     </Topics>
     <IgnoredPaths />
     <Translations auto-fill="en_US">
