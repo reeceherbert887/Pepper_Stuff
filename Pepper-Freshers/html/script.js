@@ -216,31 +216,45 @@ function playLocalDanceAudio(danceName) {
 
 function playLocalRefreshers(refreshersName) {
   var preview = document.getElementById("local-preview");
-  var audioFile = "";
   var videoFile = "";
+  var title = "";
 
-  if (refreshersName === "Bees") {
-    videoFile = "../refreshers/Bees_Gees.mp4";
-    audioFile = "../refreshers/epicsax.ogg";
+  // Core refreshers only:
+  // Bees = Bee Gees video on tablet
+  // Surprise = Rick Roll video on tablet
+  // Speech = Pepper speech/animation, no random media
+  if (refreshersName.toLowerCase() === "bees") {
+    title = "Bees";
+    videoFile = "assets/Bees_Gees.mp4";
   }
-  if (refreshersName === "Surprise") {
-    videoFile = "../refreshers/Rick Roll Link.mp4";
-    audioFile = "../refreshers/swiftswords_ext.mp3";
+  if (refreshersName.toLowerCase() === "surprise") {
+    title = "Surprise";
+    videoFile = "assets/Rick Roll Link.mp4";
   }
-  if (refreshersName === "Speech") {
-    videoFile = "../refreshers/HullRS_Christmas_2025.mp4";
+  if (refreshersName.toLowerCase() === "speech") {
+    title = "Robotics Society";
   }
 
   stopLocalMedia();
 
-  if (preview && videoFile !== "") {
-    preview.innerHTML = '<video id="refreshers-local-video" width="80%" controls autoplay><source src="' + videoFile + '" type="video/mp4"></video>';
-    localVideo = document.getElementById("refreshers-local-video");
-  }
+  if (!preview) return;
 
-  if (audioFile !== "") {
-    localDanceAudio = new Audio(audioFile);
-    localDanceAudio.play().catch(function (err) { console.log("Local refreshers audio could not play:", err); });
+  if (videoFile !== "") {
+    preview.innerHTML =
+      '<h2>' + title + '</h2>' +
+      '<video id="refreshers-local-video" width="90%" controls autoplay playsinline>' +
+      '<source src="' + videoFile + '" type="video/mp4">' +
+      '</video>';
+    localVideo = document.getElementById("refreshers-local-video");
+    if (localVideo) {
+      localVideo.play().catch(function (err) {
+        console.log("Video could not autoplay. Press play on the tablet/video.", err);
+      });
+    }
+  } else {
+    preview.innerHTML =
+      '<h2>Want to thwart the robot uprising?</h2>' +
+      '<p>Join the Robotics Society!</p>';
   }
 }
 
@@ -279,16 +293,17 @@ function selectDance(danceName) {
 }
 
 function selectRefreshers(refreshersName) {
-  setPlayingScreen("Pepper is starting Refreshers: " + refreshersName, "refreshers-screen");
+  setPlayingScreen("Starting: " + refreshersName, "refreshers-screen");
 
-  if (!isPepperTablet()) {
-    console.log("LOCAL TEST: refreshers selected:", refreshersName);
-    playLocalRefreshers(refreshersName);
-    return;
+  // Always play/show the media on the tablet UI.
+  // This also works when testing locally in a browser.
+  console.log("Refreshers selected:", refreshersName);
+  playLocalRefreshers(refreshersName);
+
+  // On Pepper, still raise the event so the switch starts the matching animation/speech.
+  if (isPepperTablet()) {
+    raisePepperEvent("PepperFreshers/DanceSelected", refreshersName);
   }
-
-  raisePepperEvent("PepperFreshers/RefreshersSelected", refreshersName);
-  raisePepperEvent("PepperFreshers/DanceSelected", refreshersName);
 }
 
 function resetQuiz() {

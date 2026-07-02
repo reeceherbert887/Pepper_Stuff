@@ -14,10 +14,17 @@
             <translation type="vanished">Hello</translation>
         </message>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</source>
             <comment>Text</comment>
-            <translation type="unfinished">Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</translation>
+            <translation type="obsolete">Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Bees/Animated Say</name>
+        <message>
+            <source>Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</source>
+            <comment>Text</comment>
+            <translation type="obsolete">Hello, I am pepper the humanoid robot. im not just a robot i can play the saxaphone.</translation>
         </message>
     </context>
     <context>
@@ -47,10 +54,9 @@
     <context>
         <name>behavior_1/behavior.xar:/Head Final Speech</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>this may seem silly however this is only some of what i am capable of! If you press my togh hand, you can find out more about the Robotics Society.</source>
             <comment>Text</comment>
-            <translation type="unfinished">this may seem silly however this is only some of what i am capable of! If you press my togh hand, you can find out more about the Robotics Society.</translation>
+            <translation type="obsolete">this may seem silly however this is only some of what i am capable of! If you press my togh hand, you can find out more about the Robotics Society.</translation>
         </message>
     </context>
     <context>
@@ -64,10 +70,9 @@
     <context>
         <name>behavior_1/behavior.xar:/RefreshersTemplate (2)/Left Hand Speech</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Want to thwart the robot uprising? Join the robotics society!</source>
             <comment>Text</comment>
-            <translation type="unfinished">Want to thwart the robot uprising? Join the robotics society!</translation>
+            <translation type="obsolete">Want to thwart the robot uprising? Join the robotics society!</translation>
         </message>
     </context>
     <context>
@@ -137,39 +142,68 @@ Ash nazg thrakatulûk agh burzum-ishi krimpatul</translation>
         </message>
     </context>
     <context>
-        <name>behavior_1/behavior.xar:/Surpise/Rick Roll Follow-up Speech</name>
+        <name>behavior_1/behavior.xar:/Speech/Left Hand Speech</name>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
+            <source>Want to thwart the robot uprising? Join the robotics society!</source>
+            <comment>Text</comment>
+            <translation type="unfinished">Want to thwart the robot uprising? Join the robotics society!</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Surpise/Rick Roll Follow-up Speech</name>
+        <message>
             <source>hahaha, just kidding here is some of what we have been doing last year!</source>
             <comment>Text</comment>
-            <translation type="unfinished">hahaha, just kidding here is some of what we have been doing last year!</translation>
+            <translation type="obsolete">hahaha, just kidding here is some of what we have been doing last year!</translation>
         </message>
     </context>
     <context>
         <name>behavior_1/behavior.xar:/Surpise/Right Hand Prompt Speech</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>well our socity is perfect for you! touch my tablet to find out more.</source>
             <comment>Text</comment>
-            <translation type="unfinished">well our socity is perfect for you! touch my tablet to find out more.</translation>
+            <translation type="obsolete">well our socity is perfect for you! touch my tablet to find out more.</translation>
         </message>
     </context>
     <context>
         <name>behavior_1/behavior.xar:/Surpise/Right Hand Welcome Speech</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Are you interested in learning to design, code, implment and build robots? </source>
             <comment>Text</comment>
-            <translation type="unfinished">Are you interested in learning to design, code, implment and build robots? </translation>
+            <translation type="obsolete">Are you interested in learning to design, code, implment and build robots? </translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Surprise/Rick Roll Follow-up Speech</name>
+        <message>
+            <source>hahaha, just kidding here is some of what we have been doing last year!</source>
+            <comment>Text</comment>
+            <translation type="obsolete">hahaha, just kidding here is some of what we have been doing last year!</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Surprise/Right Hand Prompt Speech</name>
+        <message>
+            <source>well our socity is perfect for you! touch my tablet to find out more.</source>
+            <comment>Text</comment>
+            <translation type="obsolete">well our socity is perfect for you! touch my tablet to find out more.</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Surprise/Right Hand Welcome Speech</name>
+        <message>
+            <source>Are you interested in learning to design, code, implment and build robots? </source>
+            <comment>Text</comment>
+            <translation type="obsolete">Are you interested in learning to design, code, implment and build robots? </translation>
         </message>
     </context>
     <context>
         <name>behavior_1/behavior.xar:/Video Follow-up Speech</name>
         <message>
-            <location filename="behavior_1/behavior.xar" line="0"/>
             <source>I can dance</source>
             <comment>Text</comment>
-            <translation type="unfinished">I can dance</translation>
+            <translation type="obsolete">I can dance</translation>
         </message>
     </context>
     <context>
