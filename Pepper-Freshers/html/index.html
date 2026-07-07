@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Pepper Personality Test</title>
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
   <script src="/libs/qimessaging/2/qimessaging.js"></script>
 </head>
 
@@ -48,7 +48,7 @@
       <p>Select which Pepper project you'd like to explore:</p>
       <div class="projects-container">
         <button type="button" class="project-button" onclick="showScreen('pepper-dance-screen')">Pepper Dance</button>
-        <button type="button" class="project-button" onclick="selectProject('Openday')">Openday</button>
+        <button type="button" class="project-button" onclick="showScreen('photo-opportunity-screen')">Photo Opportunity</button>
         <button type="button" class="project-button" onclick="showScreen('refreshers-screen')">Refreshers</button>
       </div>
       <button type="button" onclick="resetQuiz()" class="back-button">Back</button>
@@ -75,7 +75,16 @@
       <button type="button" onclick="showScreen('projects-screen')" class="back-button">Back</button>
     </section>
 
+      <section id="photo-opportunity-screen" class="screen">
+      <h1>Photo Opportunity</h1>
+      <p>Press to start:</p>
+      <div class="projects-container">
+        <button type="button" class="project-button" onclick="startPhotoOpportunity()">Start</button>
+      </div>
+      <button type="button" onclick="showScreen('projects-screen')" class="back-button">Back</button>
+    </section>
+
   </main>
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>

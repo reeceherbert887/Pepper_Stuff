@@ -32,6 +32,11 @@
         <File name="translation_en_US" src="translations/translation_en_US.qm" />
         <File name="Bees_Gees" src="html/assets/Bees_Gees.mp4" />
         <File name="Rick Roll Link" src="html/assets/Rick Roll Link.mp4" />
+        <File name="swiftswords_ext" src="behavior_1/swiftswords_ext.mp3" />
+        <File name="taichimove" src="behavior_1/taichimove.pmt" />
+        <File name="heaven1" src="behavior_1/behavior_1/heaven1.ogg" />
+        <File name="camera1" src="behavior_1/camera1.ogg" />
+        <File name="epicsax" src="behavior_1/epicsax.ogg" />
     </Resources>
     <Topics>
         <Topic name="dance_danceoftheknights_enu" src="dance_danceoftheknights/dance_danceoftheknights_enu.top" topicName="danceoftheknights" language="en_US" nuance="enu" />

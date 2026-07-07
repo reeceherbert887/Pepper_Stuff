@@ -173,6 +173,7 @@ function sendResultToPepper(message) {
 
 var localDanceAudio = null;
 var localVideo = null;
+var photoOpportunityTimer = null;
 
 function isPepperTablet() {
   return (typeof QiSession !== "undefined");
@@ -190,7 +191,15 @@ function setPlayingScreen(message, returnScreen) {
   showScreen("dance-playing-screen");
 }
 
+function stopPhotoOpportunityLoop() {
+  if (photoOpportunityTimer) {
+    clearTimeout(photoOpportunityTimer);
+    photoOpportunityTimer = null;
+  }
+}
+
 function stopLocalMedia() {
+  stopPhotoOpportunityLoop();
   if (localDanceAudio) {
     localDanceAudio.pause();
     localDanceAudio.currentTime = 0;
@@ -256,6 +265,24 @@ function playLocalRefreshers(refreshersName) {
       '<h2>Want to thwart the robot uprising?</h2>' +
       '<p>Join the Robotics Society!</p>';
   }
+}
+
+
+function startPhotoOpportunity() {
+  setPlayingScreen("Photo opportunity started. Pepper will cycle through poses every 15-20 seconds.", "photo-opportunity-screen");
+
+  stopPhotoOpportunityLoop();
+
+  if (!isPepperTablet()) {
+    var preview = document.getElementById("local-preview");
+    if (preview) {
+      preview.innerHTML = "<h2>Photo Opportunity</h2><p>Local test mode: Pepper would now cycle through the photo animations.</p>";
+    }
+    console.log("LOCAL TEST: would start Photo Opportunity animation loop");
+    return;
+  }
+
+  raisePepperEvent("PepperFreshers/DanceSelected", "photo_opp");
 }
 
 function nextSection() {
