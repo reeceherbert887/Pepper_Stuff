@@ -142,12 +142,25 @@ Ash nazg thrakatulûk agh burzum-ishi krimpatul</translation>
         </message>
     </context>
     <context>
-        <name>behavior_1/behavior.xar:/Speech/Left Hand Speech</name>
+        <name>behavior_1/behavior.xar:/Speech/Animated Say</name>
+        <message>
+            <source>Hello</source>
+            <comment>Text</comment>
+            <translation type="vanished">Hello</translation>
+        </message>
         <message>
             <location filename="behavior_1/behavior.xar" line="0"/>
             <source>Want to thwart the robot uprising? Join the robotics society!</source>
             <comment>Text</comment>
             <translation type="unfinished">Want to thwart the robot uprising? Join the robotics society!</translation>
+        </message>
+    </context>
+    <context>
+        <name>behavior_1/behavior.xar:/Speech/Left Hand Speech</name>
+        <message>
+            <source>Want to thwart the robot uprising? Join the robotics society!</source>
+            <comment>Text</comment>
+            <translation type="obsolete">Want to thwart the robot uprising? Join the robotics society!</translation>
         </message>
     </context>
     <context>
