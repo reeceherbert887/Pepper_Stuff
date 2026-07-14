@@ -175,18 +175,30 @@ var localDanceAudio = null;
 var localVideo = null;
 var photoOpportunityTimer = null;
 
-function isPepperTablet() {
-  return (typeof QiSession !== "undefined");
-}
-
 function setPlayingScreen(message, returnScreen) {
+  var playingScreen = document.getElementById("dance-playing-screen");
   var messageEl = document.getElementById("playing-message");
   var backButton = document.getElementById("playing-back-button");
   var preview = document.getElementById("local-preview");
 
-  if (messageEl) messageEl.innerHTML = message;
-  if (backButton) backButton.onclick = function () { stopLocalMedia(); showScreen(returnScreen); };
-  if (preview) preview.innerHTML = "";
+  if (playingScreen) {
+    playingScreen.className = "screen";
+  }
+
+  if (messageEl) {
+    messageEl.innerHTML = message;
+  }
+
+  if (backButton) {
+    backButton.onclick = function () {
+      stopLocalMedia();
+      showScreen(returnScreen);
+    };
+  }
+
+  if (preview) {
+    preview.innerHTML = "";
+  }
 
   showScreen("dance-playing-screen");
 }
@@ -214,59 +226,146 @@ function stopLocalMedia() {
 
 function playLocalDanceAudio(danceName) {
   var audioFile = "";
-  if (danceName === "dance_knights") audioFile = "../behavior_1/kishitachinoodori.ogg";
-  if (danceName === "walk_this_way") audioFile = "../behavior_1/walk_this_way.ogg";
-  if (danceName === "02_Hungary" || danceName === "hungarian" || danceName === "hungary") audioFile = "../behavior_1/02_Hungary.ogg";
-  if (audioFile === "") return;
+
+  if (danceName === "dance_knights") {
+    audioFile = "../behavior_1/kishitachinoodori.ogg";
+  }
+
+  if (danceName === "walk_this_way") {
+    audioFile = "../behavior_1/walk_this_way.ogg";
+  }
+
+  if (
+    danceName === "02_Hungary" ||
+    danceName === "hungarian" ||
+    danceName === "hungary"
+  ) {
+    audioFile = "../behavior_1/02_Hungary.ogg";
+  }
+
+  if (audioFile === "") {
+    console.log("No local audio found for:", danceName);
+    return;
+  }
+
   stopLocalMedia();
+
   localDanceAudio = new Audio(audioFile);
-  localDanceAudio.play().catch(function (err) { console.log("Local dance audio could not play:", err); });
+
+  localDanceAudio.onended = function () {
+    localDanceAudio = null;
+    showScreen("pepper-dance-screen");
+  };
+
+  localDanceAudio.play().catch(function (error) {
+    console.log(
+      "Local dance audio could not play:",
+      error
+    );
+  });
 }
 
 function playLocalRefreshers(refreshersName) {
+  var playingScreen = document.getElementById("dance-playing-screen");
   var preview = document.getElementById("local-preview");
+  var playingLogo = document.getElementById("playing-logo");
+  var playingMessage = document.getElementById("playing-message");
   var videoFile = "";
   var title = "";
 
-  // Core refreshers only:
-  // Bees = Bee Gees video on tablet
-  // Surprise = Rick Roll video on tablet
-  // Speech = Pepper speech/animation, no random media
-  if (refreshersName.toLowerCase() === "bees") {
+  refreshersName = refreshersName.toLowerCase();
+
+  if (refreshersName === "bees") {
     title = "Bees";
     videoFile = "assets/Bees_Gees.mp4";
   }
-  if (refreshersName.toLowerCase() === "surprise") {
+
+  if (refreshersName === "surprise") {
     title = "Surprise";
     videoFile = "assets/Rick Roll Link.mp4";
   }
-  if (refreshersName.toLowerCase() === "speech") {
+
+  if (refreshersName === "speech") {
     title = "Robotics Society";
   }
 
   stopLocalMedia();
 
-  if (!preview) return;
+  if (!preview) {
+    return;
+  }
+
+  if (playingScreen) {
+    playingScreen.className = "screen active refreshers-video-mode";
+  }
 
   if (videoFile !== "") {
+    if (playingLogo) {
+      playingLogo.style.display = "none";
+    }
+
+    if (playingMessage) {
+      playingMessage.style.display = "none";
+    }
+
     preview.innerHTML =
-      '<h2>' + title + '</h2>' +
-      '<video id="refreshers-local-video" width="90%" controls autoplay playsinline>' +
-      '<source src="' + videoFile + '" type="video/mp4">' +
-      '</video>';
+      '<div class="refreshers-video-container">' +
+        '<h2 class="refreshers-video-title">' + title + '</h2>' +
+        '<video ' +
+          'id="refreshers-local-video" ' +
+          'class="refreshers-video" ' +
+          'controls ' +
+          'autoplay ' +
+          'playsinline>' +
+          '<source src="' + videoFile + '" type="video/mp4">' +
+          'Your browser does not support video playback.' +
+        '</video>' +
+      '</div>';
+
     localVideo = document.getElementById("refreshers-local-video");
+
     if (localVideo) {
-      localVideo.play().catch(function (err) {
-        console.log("Video could not autoplay. Press play on the tablet/video.", err);
+      localVideo.onended = function () {
+        stopLocalMedia();
+        restorePlayingScreen();
+        showScreen("refreshers-screen");
+      };
+
+      localVideo.play().catch(function (error) {
+        console.log(
+          "Video could not autoplay. Press play on the tablet.",
+          error
+        );
       });
     }
   } else {
+    restorePlayingScreen();
+
     preview.innerHTML =
-      '<h2>Want to thwart the robot uprising?</h2>' +
-      '<p>Join the Robotics Society!</p>';
+      '<div class="refreshers-speech-container">' +
+        '<h2>Want to thwart the robot uprising?</h2>' +
+        '<p>Join the Robotics Society!</p>' +
+      '</div>';
   }
 }
 
+function restorePlayingScreen() {
+  var playingScreen = document.getElementById("dance-playing-screen");
+  var playingLogo = document.getElementById("playing-logo");
+  var playingMessage = document.getElementById("playing-message");
+
+  if (playingScreen) {
+    playingScreen.className = "screen";
+  }
+
+  if (playingLogo) {
+    playingLogo.style.display = "block";
+  }
+
+  if (playingMessage) {
+    playingMessage.style.display = "block";
+  }
+}
 
 function startPhotoOpportunity() {
   setPlayingScreen("Photo opportunity started. Pepper will cycle through poses every 15-20 seconds.", "photo-opportunity-screen");
@@ -308,28 +407,42 @@ function raisePepperEvent(eventName, value) {
 }
 
 function selectDance(danceName) {
-  setPlayingScreen("Pepper is dancing!", "pepper-dance-screen");
+  restorePlayingScreen();
+
+  setPlayingScreen(
+    "Pepper is dancing!",
+    "pepper-dance-screen"
+  );
 
   if (!isPepperTablet()) {
-    console.log("LOCAL TEST: dance selected:", danceName);
+    console.log(
+      "LOCAL TEST: dance selected:",
+      danceName
+    );
+
     playLocalDanceAudio(danceName);
     return;
   }
 
-  raisePepperEvent("PepperFreshers/DanceSelected", danceName);
+  raisePepperEvent(
+    "PepperFreshers/DanceSelected",
+    danceName
+  );
 }
 
 function selectRefreshers(refreshersName) {
-  setPlayingScreen("Starting: " + refreshersName, "refreshers-screen");
+  setPlayingScreen(
+    "Starting: " + refreshersName,
+    "refreshers-screen"
+  );
 
-  // Always play/show the media on the tablet UI.
-  // This also works when testing locally in a browser.
-  console.log("Refreshers selected:", refreshersName);
   playLocalRefreshers(refreshersName);
 
-  // On Pepper, still raise the event so the switch starts the matching animation/speech.
   if (isPepperTablet()) {
-    raisePepperEvent("PepperFreshers/DanceSelected", refreshersName);
+    raisePepperEvent(
+      "PepperFreshers/DanceSelected",
+      refreshersName
+    );
   }
 }
 
@@ -339,23 +452,39 @@ function resetQuiz() {
 }
 
 function setupPepperReturnEvents() {
-  if (!isPepperTablet()) return;
+  if (typeof QiSession === "undefined") {
+    console.log("Not running on Pepper tablet.");
+    return;
+  }
 
   QiSession(function (session) {
     session.service("ALMemory").then(function (memory) {
-      memory.subscriber("PepperFreshers/ReturnToDancePage").then(function (subscriber) {
+
+      memory.subscriber(
+        "PepperFreshers/ReturnToDancePage"
+      ).then(function (subscriber) {
+
         subscriber.signal.connect(function () {
           stopLocalMedia();
           showScreen("pepper-dance-screen");
         });
       });
 
-      memory.subscriber("PepperFreshers/ReturnToRefreshersPage").then(function (subscriber) {
+      memory.subscriber(
+        "PepperFreshers/ReturnToRefreshersPage"
+      ).then(function (subscriber) {
+
         subscriber.signal.connect(function () {
           stopLocalMedia();
           showScreen("refreshers-screen");
         });
       });
+
+    }).catch(function (error) {
+      console.log(
+        "Could not connect tablet return events:",
+        error
+      );
     });
   });
 }

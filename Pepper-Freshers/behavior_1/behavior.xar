@@ -4540,4 +4540,74 @@ class MyClass(GeneratedClass):
         self.onSucceed()
 
     def onInput_onStop(self):
-        self.onUnload()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onSucceed" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Output name="onFailed" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" /></Box><Link inputowner="4" indexofinput="2" outputowner="5" indexofoutput="4" /><Link inputowner="4" indexofinput="2" outputowner="5" indexofoutput="5" /><Link inputowner="9" indexofinput="2" outputowner="8" indexofoutput="6" /><Link inputowner="9" indexofinput="3" outputowner="8" indexofoutput="4" /><Link inputowner="5" indexofinput="2" outputowner="9" indexofoutput="4" /><Link inputowner="7" indexofinput="2" outputowner="10" indexofoutput="4" /><Link inputowner="7" indexofinput="2" outputowner="10" indexofoutput="5" /><Link inputowner="10" indexofinput="2" outputowner="9" indexofoutput="6" /><Link inputowner="1" indexofinput="2" outputowner="9" indexofoutput="5" /><Link inputowner="21" indexofinput="2" outputowner="12" indexofoutput="4" /><Link inputowner="21" indexofinput="2" outputowner="12" indexofoutput="5" /><Link inputowner="12" indexofinput="2" outputowner="9" indexofoutput="7" /><Link inputowner="13" indexofinput="2" outputowner="17" indexofoutput="4" /><Link inputowner="13" indexofinput="2" outputowner="17" indexofoutput="5" /><Link inputowner="16" indexofinput="2" outputowner="18" indexofoutput="4" /><Link inputowner="16" indexofinput="2" outputowner="18" indexofoutput="5" /><Link inputowner="17" indexofinput="2" outputowner="9" indexofoutput="8" /><Link inputowner="18" indexofinput="2" outputowner="9" indexofoutput="9" /><Link inputowner="14" indexofinput="2" outputowner="15" indexofoutput="4" /><Link inputowner="14" indexofinput="2" outputowner="15" indexofoutput="5" /><Link inputowner="15" indexofinput="2" outputowner="9" indexofoutput="10" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="6" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="8" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="0" indexofinput="4" outputowner="1" indexofoutput="8" /><Link inputowner="0" indexofinput="4" outputowner="4" indexofoutput="10" /><Link inputowner="0" indexofinput="4" outputowner="7" indexofoutput="10" /><Link inputowner="0" indexofinput="4" outputowner="21" indexofoutput="4" /><Link inputowner="0" indexofinput="4" outputowner="13" indexofoutput="4" /><Link inputowner="0" indexofinput="4" outputowner="16" indexofoutput="4" /><Link inputowner="0" indexofinput="4" outputowner="14" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>
+        self.onUnload()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onSucceed" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Output name="onFailed" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" /></Box><Box name="Return to Dance Menu" id="19" localization="8" tooltip="Enter tooltip here" x="985" y="326"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[from naoqi import ALProxy
+
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.memory = None
+
+    def onLoad(self):
+        try:
+            self.memory = ALProxy("ALMemory")
+        except Exception, error:
+            self.logger.error(
+                "Could not connect to ALMemory: %s" % error
+            )
+
+    def onUnload(self):
+        self.memory = None
+
+    def onInput_onStart(self):
+        try:
+            if self.memory is None:
+                self.memory = ALProxy("ALMemory")
+
+            self.memory.raiseEvent(
+                "PepperFreshers/ReturnToDancePage",
+                "done"
+            )
+
+        except Exception, error:
+            self.logger.error(
+                "Could not return to dance menu: %s" % error
+            )
+
+    def onInput_onStop(self):
+        self.onUnload()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onSucceed" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Output name="onFailed" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" /></Box><Box name="Return to Refreshers Menu" id="20" localization="8" tooltip="Enter tooltip here" x="976" y="681"><bitmap>media/images/box/box-python-script.png</bitmap><script language="4"><content><![CDATA[from naoqi import ALProxy
+
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        self.memory = None
+
+    def onLoad(self):
+        try:
+            self.memory = ALProxy("ALMemory")
+        except Exception, error:
+            self.logger.error(
+                "Could not connect to ALMemory: %s" % error
+            )
+
+    def onUnload(self):
+        self.memory = None
+
+    def onInput_onStart(self):
+        try:
+            if self.memory is None:
+                self.memory = ALProxy("ALMemory")
+
+            self.memory.raiseEvent(
+                "PepperFreshers/ReturnToRefreshersPage",
+                "done"
+            )
+
+        except Exception, error:
+            self.logger.error(
+                "Could not return to Refreshers menu: %s" % error
+            )
+
+    def onInput_onStop(self):
+        self.onUnload()]]></content></script><Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" /><Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" /><Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" /><Output name="onSucceed" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" /><Output name="onFailed" type="1" type_size="1" nature="1" inner="0" tooltip="" id="5" /></Box><Link inputowner="4" indexofinput="2" outputowner="5" indexofoutput="4" /><Link inputowner="4" indexofinput="2" outputowner="5" indexofoutput="5" /><Link inputowner="9" indexofinput="2" outputowner="8" indexofoutput="6" /><Link inputowner="9" indexofinput="3" outputowner="8" indexofoutput="4" /><Link inputowner="5" indexofinput="2" outputowner="9" indexofoutput="4" /><Link inputowner="7" indexofinput="2" outputowner="10" indexofoutput="4" /><Link inputowner="7" indexofinput="2" outputowner="10" indexofoutput="5" /><Link inputowner="10" indexofinput="2" outputowner="9" indexofoutput="6" /><Link inputowner="1" indexofinput="2" outputowner="9" indexofoutput="5" /><Link inputowner="21" indexofinput="2" outputowner="12" indexofoutput="4" /><Link inputowner="21" indexofinput="2" outputowner="12" indexofoutput="5" /><Link inputowner="12" indexofinput="2" outputowner="9" indexofoutput="7" /><Link inputowner="13" indexofinput="2" outputowner="17" indexofoutput="4" /><Link inputowner="13" indexofinput="2" outputowner="17" indexofoutput="5" /><Link inputowner="16" indexofinput="2" outputowner="18" indexofoutput="4" /><Link inputowner="16" indexofinput="2" outputowner="18" indexofoutput="5" /><Link inputowner="17" indexofinput="2" outputowner="9" indexofoutput="8" /><Link inputowner="18" indexofinput="2" outputowner="9" indexofoutput="9" /><Link inputowner="14" indexofinput="2" outputowner="15" indexofoutput="4" /><Link inputowner="14" indexofinput="2" outputowner="15" indexofoutput="5" /><Link inputowner="15" indexofinput="2" outputowner="9" indexofoutput="10" /><Link inputowner="2" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="3" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="6" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="11" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="8" indexofinput="2" outputowner="0" indexofoutput="2" /><Link inputowner="19" indexofinput="2" outputowner="1" indexofoutput="8" /><Link inputowner="19" indexofinput="2" outputowner="4" indexofoutput="10" /><Link inputowner="19" indexofinput="2" outputowner="7" indexofoutput="10" /><Link inputowner="20" indexofinput="2" outputowner="21" indexofoutput="4" /><Link inputowner="20" indexofinput="2" outputowner="13" indexofoutput="4" /><Link inputowner="20" indexofinput="2" outputowner="16" indexofoutput="4" /><Link inputowner="20" indexofinput="2" outputowner="14" indexofoutput="4" /></Diagram></BehaviorKeyframe></BehaviorLayer></Timeline></Box></ChoregrapheProject>
